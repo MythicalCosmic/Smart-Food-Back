@@ -26,7 +26,7 @@ BOT_API_KEY = 'yTSNHL0A.s8NpJeiKZh2zY6psnwSPKmU8X9tZEnjB'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://smart-food-back.onrender.com']
 
 
 # Application definition
@@ -191,4 +191,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 
-CSRF_TRUSTED_ORIGINS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://smart-food-back.onrender.com']
