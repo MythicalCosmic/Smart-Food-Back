@@ -55,3 +55,5 @@ class CategoryUpdateRetriveView(CustomResponseMixin, generics.RetrieveUpdateAPIV
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticated]
 
+
+
