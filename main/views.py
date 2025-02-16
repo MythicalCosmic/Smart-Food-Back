@@ -6,9 +6,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_api_key.permissions import HasAPIKey
 from .custom_responses import CustomResponseMixin
 from rest_framework import filters
+from .decoraters import GroupPermission
 
 
-
+#Telegram User Actions
 class TelegramUserCreateView(CustomResponseMixin, generics.CreateAPIView):
     queryset = TelegramUsers.objects.order_by("-id")
     serializer_class = TelegramUserSerializer
@@ -19,7 +20,7 @@ class TelegramUserRetriveView(CustomResponseMixin, generics.RetrieveAPIView):
     serializer_class = TelegramUserSerializer
     permission_classes = [IsAuthenticated]
 
-class TelegramUserListView(CustomResponseMixin, generics.ListAPIView):
+class TelegramUserListView(generics.ListAPIView):
     queryset = TelegramUsers.objects.order_by("-id")
     serializer_class = TelegramUserSerializer
     permission_classes = [IsAuthenticated]
@@ -27,6 +28,9 @@ class TelegramUserListView(CustomResponseMixin, generics.ListAPIView):
     search_fields = ['username', 'telegram_id']
 
 
+
+
+#Product Actions
 class ProductsListView(CustomResponseMixin, generics.ListAPIView):
     queryset = Product.objects.order_by("-id")
     serializer_class = ProductSerializer
@@ -45,6 +49,8 @@ class ProductUpdateRetrive(CustomResponseMixin, generics.RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated]
 
 
+
+#Category Actions
 class CategoryListCreateVIew(CustomResponseMixin, generics.ListCreateAPIView):
     queryset = Category.objects.order_by("-id")
     serializer_class = CategorySerializer
@@ -57,3 +63,19 @@ class CategoryUpdateRetriveView(CustomResponseMixin, generics.RetrieveUpdateAPIV
 
 
 
+#Orders Actions
+class OrdersListView(generics.ListAPIView):
+    queryset = Order.objects.order_by("-id")
+    serializer_class =  OrderSerializer
+    permission_classes = [IsAuthenticated]
+
+class OrdersCreateView(generics.CreateAPIView):
+    queryset = Order.objects.order_by("-id")
+    serializer_class =  OrderSerializer
+    permission_classes = [HasAPIKey]
+
+
+class OrdersRetrive(generics.RetrieveAPIView):
+    queryset = Order.objects.order_by("-id")
+    serializer_class =  OrderSerializer
+    permission_classes = [IsAuthenticated, GroupPermission]

@@ -12,5 +12,9 @@ urlpatterns = [
     path("api/products/<int:pk>/", ProductUpdateRetrive.as_view(), name="products-update-retrive"),
     #category
     path("api/category/", CategoryListCreateVIew.as_view(), name="category-list-create"),
-    path("api/category/<int:pk>/", CategoryUpdateRetriveView.as_view(), name="category-update-retrive")
+    path("api/category/<int:pk>/", CategoryUpdateRetriveView.as_view(), name="category-update-retrive"),
+    #orders
+    path("api/orders/all", OrdersListView.as_view(), name="order-list"),
+    path("api/orders/", OrdersCreateView.as_view(), name="order-create"),
+    path("api/orders/<int:pk>/", OrdersRetrive.as_view(), name="order-retrive")
 ]
