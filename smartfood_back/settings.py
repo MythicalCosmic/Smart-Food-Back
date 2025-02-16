@@ -26,7 +26,7 @@ BOT_API_KEY = 'yTSNHL0A.s8NpJeiKZh2zY6psnwSPKmU8X9tZEnjB'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://smart-food-back.onrender.com']
+ALLOWED_HOSTS = ['smart-food-back.onrender.com']
 
 
 # Application definition
