@@ -6,7 +6,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_api_key.permissions import HasAPIKey
 from .custom_responses import CustomResponseMixin
 from rest_framework import filters
+from rest_framework.response import Response
 from .decoraters import GroupPermission
+from rest_framework.exceptions import ValidationError
+
 
 
 #Telegram User Actions
@@ -69,10 +72,32 @@ class OrdersListView(generics.ListAPIView):
     serializer_class =  OrderSerializer
     permission_classes = [IsAuthenticated]
 
-class OrdersCreateView(generics.CreateAPIView):
+class OrdersCreateView(CustomResponseMixin, generics.CreateAPIView):
     queryset = Order.objects.order_by("-id")
-    serializer_class =  OrderSerializer
+    serializer_class = OrderSerializer
     permission_classes = [HasAPIKey]
+
+    def create(self, request, *args, **kwargs):
+        items_data = request.data.pop("items", None)
+        print(items_data) 
+        
+        if not items_data:
+            raise ValidationError({"items": "This field is required and must contain valid data."})
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        order = serializer.save()
+
+        for item in items_data:
+            item["order"] = order.id
+            item_serializer = OrderItemSerializer(data=item)
+            item_serializer.is_valid(raise_exception=True)
+            item_serializer.save()  
+
+        return Response(serializer.data, status=201)
+
+
+
 
 
 class OrdersRetrive(generics.RetrieveAPIView):
