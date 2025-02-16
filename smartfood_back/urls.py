@@ -19,10 +19,11 @@ from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView , TokenBlacklistView  # type: ignore
 from django.conf import settings 
 from django.conf.urls.static import static # type: ignore
-
+from docs.views import main
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', main, name='main'),
     path('', include('main.urls')),
 
     path('api-auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

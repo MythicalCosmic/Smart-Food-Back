@@ -26,7 +26,7 @@ BOT_API_KEY = 'yTSNHL0A.s8NpJeiKZh2zY6psnwSPKmU8X9tZEnjB'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['smart-food-back.onrender.com']
+ALLOWED_HOSTS = ['smart-food-back.onrender.com', '127.0.0.1']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_filters',
     "rest_framework_api_key",
     'main',
+    'docs',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
 ]

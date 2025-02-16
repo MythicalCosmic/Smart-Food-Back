@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast-Food Ordering System API Docs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        code {
+            background: #ecf0f1;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+        .endpoint {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-left: 5px solid #3498db;
+            background: #ecf0f1;
+            border-radius: 5px;
+        }
+        .method {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        .param {
+            font-weight: bold;
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📌 Fast-Food Ordering System API Documentation</h1>
+    <p>This API manages Telegram users, products, categories, and orders in a fast-food ordering system.</p>
+
+    <h2>🔑 Authentication</h2>
+    <ul>
+        <li><b>API Key Authentication</b> - Required for certain endpoints.</li>
+        <li><b>Token Authentication</b> - Required for user-specific actions.</li>
+    </ul>
+
+    <h2>🛠 Models</h2>
+
+    <h3>1️⃣ TelegramUsers</h3>
+    <p>Represents a Telegram user who interacts with the bot.</p>
+    <ul>
+        <li><span class="param">telegram_id</span> (Integer) – Unique Telegram ID.</li>
+        <li><span class="param">username</span> (String, nullable) – Telegram username.</li>
+        <li><span class="param">phone_number</span> (String) – User’s phone number.</li>
+        <li><span class="param">telegram_name</span> (String) – Display name in Telegram.</li>
+        <li><span class="param">real_name</span> (String, nullable) – User’s real name.</li>
+        <li><span class="param">latitude</span> (Decimal, nullable) – User's location latitude.</li>
+        <li><span class="param">longitude</span> (Decimal, nullable) – User's location longitude.</li>
+        <li><span class="param">created_at</span> (DateTime) – Timestamp when added.</li>
+        <li><span class="param">updated_at</span> (DateTime) – Timestamp when last updated.</li>
+    </ul>
+
+    <h3>2️⃣ Category</h3>
+    <p>Represents a category for products.</p>
+    <ul>
+        <li><span class="param">name</span> (String) – Category name.</li>
+        <li><span class="param">created_at</span> (DateTime) – Timestamp when created.</li>
+        <li><span class="param">updated_at</span> (DateTime) – Timestamp when last updated.</li>
+    </ul>
+
+    <h3>3️⃣ Product</h3>
+    <p>Represents an available food product.</p>
+    <ul>
+        <li><span class="param">name</span> (String) – Product name.</li>
+        <li><span class="param">description</span> (Text, nullable) – Product description.</li>
+        <li><span class="param">price</span> (Decimal) – Price of the product.</li>
+        <li><span class="param">category_id</span> (Foreign Key) – Associated category.</li>
+        <li><span class="param">image</span> (Image, nullable) – Product image.</li>
+        <li><span class="param">is_available</span> (Boolean) – Availability status.</li>
+        <li><span class="param">created_at</span> (DateTime) – Timestamp when created.</li>
+        <li><span class="param">updated_at</span> (DateTime) – Timestamp when last updated.</li>
+    </ul>
+
+    <h3>4️⃣ Order</h3>
+    <p>Represents an order placed by a user.</p>
+    <ul>
+        <li><span class="param">user</span> (Foreign Key) – Associated Telegram user.</li>
+        <li><span class="param">products</span> (ManyToMany) – Ordered products.</li>
+        <li><span class="param">total_price</span> (Decimal) – Total cost of the order.</li>
+        <li><span class="param">status</span> (String) – Order status (e.g., pending, confirmed, delivered).</li>
+        <li><span class="param">created_at</span> (DateTime) – Timestamp when created.</li>
+        <li><span class="param">updated_at</span> (DateTime) – Timestamp when last updated.</li>
+    </ul>
+
+    <h2>🔗 API Endpoints</h2>
+
+    <div class="endpoint">
+        <p><span class="method">POST</span> <code>/api/telegram-users/</code> – Create a new Telegram user.</p>
+    </div>
+
+    <div class="endpoint">
+        <p><span class="method">GET</span> <code>/api/telegram-users/all</code> – Retrieve all Telegram users.</p>
+    </div>
+
+    <div class="endpoint">
+        <p><span class="method">GET</span> <code>/api/telegram-users/&lt;id&gt;/</code> – Retrieve a specific Telegram user.</p>
+    </div>
+
+    <div class="endpoint">
+        <p><span class="method">GET</span> <code>/api/products/</code> – Retrieve all products.</p>
+    </div>
+
+    <div class="endpoint">
+        <p><span class="method">POST</span> <code>/api/products/create</code> – Add a new product.</p>
+    </div>
+
+    <div class="endpoint">
+        <p><span class="method">GET</span> <code>/api/products/&lt;id&gt;/</code> – Retrieve or update a product.</p>
+    </div>
+
+    <div class="endpoint">
+        <p><span class="method">GET</span> <code>/api/category/</code> – Retrieve all categories.</p>
+    </div>
+
+    <div class="endpoint">
+        <p><span class="method">POST</span> <code>/api/category/</code> – Create a new category.</p>
+    </div>
+
+    <div class="endpoint">
+        <p><span class="method">GET</span> <code>/api/category/&lt;id&gt;/</code> – Retrieve or update a category.</p>
+    </div>
+
+    <h2>📌 Notes</h2>
+    <ul>
+        <li>All requests requiring authentication must include a valid token or API key.</li>
+        <li>Use JSON format for request payloads.</li>
+    </ul>
+
+</div>
+
+</body>
+</html>
