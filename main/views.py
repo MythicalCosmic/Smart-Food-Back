@@ -71,6 +71,7 @@ class OrdersListView(generics.ListAPIView):
     queryset = Order.objects.order_by("-id")
     serializer_class =  OrderSerializer
     permission_classes = [IsAuthenticated]
+    
 
 class OrdersCreateView(CustomResponseMixin, generics.CreateAPIView):
     queryset = Order.objects.order_by("-id")

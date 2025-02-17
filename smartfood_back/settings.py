@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_filters',
     "rest_framework_api_key",
     'main',
+    "corsheaders",
     'docs',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -213,3 +215,5 @@ CSRF_TRUSTED_ORIGINS = ['https://smart-food-back.onrender.com']
 #         },
 #     },
 # }
+
+CORS_ALLOW_ALL_ORIGINS = True
