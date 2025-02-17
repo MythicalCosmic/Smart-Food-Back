@@ -27,7 +27,7 @@ class ProductSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ["id", "order", "name", "created_at", "updated_at"]
+        fields = ["id", "name", "created_at", "updated_at"]
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
