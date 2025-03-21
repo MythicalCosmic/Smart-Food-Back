@@ -76,7 +76,6 @@ class OrdersListView(generics.ListAPIView):
 class OrdersCreateView(CustomResponseMixin, generics.CreateAPIView):
     queryset = Order.objects.order_by("-id")
     serializer_class = OrderSerializer
-    permission_classes = [HasAPIKey]
 
     def create(self, request, *args, **kwargs):
         items_data = request.data.pop("items", None)
